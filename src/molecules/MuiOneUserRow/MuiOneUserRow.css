@@ -1,0 +1,23 @@
+
+.worker-info{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;   
+}
+
+.worker-info p{
+    white-space: nowrap;
+}
+
+
+.test{
+    position: absolute;
+    z-index: 50;
+    left: 2px;
+    top: 10%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;  
+}
+

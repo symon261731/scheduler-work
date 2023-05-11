@@ -1,0 +1,96 @@
+@import './reset.css';
+
+
+button{
+    cursor: pointer;
+}
+
+.container{
+    display: flex;
+}
+
+.navbar{
+    min-height: 100vh;
+    padding: 5px 20px;
+    color: white;
+    background-color: rgb(29, 121, 99);
+}
+
+.content{
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 40px;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.datetable{
+    width: 100%;
+    border-spacing: 0;
+    margin-bottom: 30px;
+}
+
+/* .datetable td{
+    /* position: relative; */
+    /* padding: 5px 15px 30px; */
+    /* border-left: 1px solid grey; */
+    /* border-top: 1px solid grey; */
+    /* border-bottom: 1px solid grey; */
+/* } */ 
+
+.datetable th{
+    padding: 5px 7px 30px;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
+
+/* .dates-table-row{
+    border-collapse: collapse;
+    border-spacing: 0 20px;
+} */
+
+.intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.intro__welcome {
+    font-weight: 600;
+}
+
+.buttons-group{
+    display: flex;
+    gap: 10px;
+}
+
+.buttons-group__one-button{
+    background-color: rgb(51, 106, 234);
+    color: white;
+    font-weight: 500;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+
+.mocktab {
+    display: flex;
+    font-size: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid grey;
+    margin-bottom: 30px;
+}
+
+.mocktab__button {
+    background-color: transparent;
+    padding: 3px 10px;
+    border: none;
+}
+
+
+
+
+

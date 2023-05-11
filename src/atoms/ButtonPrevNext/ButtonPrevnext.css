@@ -1,0 +1,19 @@
+
+.buttonNextPrevGroup{
+    border: 1px solid #1976d2;
+    border-radius: 5px;
+}
+
+
+.buttonNextPrevGroup__button{
+    padding: 10px 13px;
+    background-color: transparent;
+    border: none;
+    color: #1976d2;
+    font-weight: 700;
+}
+
+
+.buttonNextPrevGroup__button:first-child{
+    border-right: 1px solid #1976d2;
+}

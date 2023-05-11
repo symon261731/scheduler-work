@@ -1,0 +1,28 @@
+
+.event {
+    padding: 5px 8px;
+    border-radius: 7px;
+    font-weight: 400;
+    border: none;
+}
+
+.vacation{
+    background-color: greenyellow;
+    color: black;
+}
+
+.grooming {
+    background-color: rgb(115, 115, 255);
+    color: white;
+}
+
+.office {
+    background-color: rgba(175, 226, 255, 0.561);
+    color: rgba(175, 226, 255, 0.561);
+}
+
+.sick {
+    background-color: rgb(255, 101, 101);
+    color: white;
+}
+

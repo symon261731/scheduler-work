@@ -1,0 +1,48 @@
+
+.inputGroup{
+    margin-bottom: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.inputGroup input{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(202, 202, 202);
+    background-color: rgb(235, 235, 235);
+}
+
+.inputGroup select{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(202, 202, 202);
+    background-color: rgb(235, 235, 235);
+}
+
+.inputGroup__input-select-side{
+    flex: 0 1 80%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inputGroup__input{
+    flex: 0 1 300px;
+}
+
+.inputGroup__select{
+    flex: 0 1 180px;
+}
+
+.inputGroup__dates{
+    background-color: transparent;
+    border: none;
+    letter-spacing: 0.5px;
+    color: #1976d2;
+    font-weight: 500;
+    white-space: nowrap;
+}
