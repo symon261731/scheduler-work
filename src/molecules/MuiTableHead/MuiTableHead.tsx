@@ -32,6 +32,7 @@ export const MuiTableHead = (props: MuiTableHeadProps) => {
         })
 
     },[width])
+    
     return (
         <TableHead>
             <TableCell style={commonStyles}>

@@ -40,10 +40,6 @@ export const mockDataUser: oneUser< dayEvent[] >[] = [
 
 ]
 
-
-
-
-
 interface oneUser<T>{ 
     name: string,
     workingHours: string,

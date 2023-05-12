@@ -18,15 +18,12 @@ export const MuiMonthRow: FC<MuiMonthRowProps> = (props) => {
     const {month, year, tab} = props;
     const [width, setWidth] = useState(0);
 
-
     return (
         <>
         <TableContainer>
              <Table>
                 <MuiTableHead widthState={width} setWidth={(currentWidth:number)=>{setWidth(currentWidth)}} month={month} year={year} dates={tab}/>
-                <TableBody
-                    style={{overflow: 'hidden'}}
-                    >
+                <TableBody>
                     {mockDataUser.map((oneUser,index)=>(
                         <MuiOneUserRow
                         width={width}
@@ -42,7 +39,6 @@ export const MuiMonthRow: FC<MuiMonthRowProps> = (props) => {
                 </TableBody>
             </Table>
         </TableContainer>
-        {width}
         </>
     );
 }
