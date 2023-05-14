@@ -1,5 +1,5 @@
 import { Checkbox, TableCell, TableHead } from "@mui/material";
-import { CSSProperties, useEffect, useRef } from "react";
+import { CSSProperties, useCallback, useEffect, useRef } from "react";
 import { getDayOfWeek } from "../../shared/utils/getDayOfWeek";
 import './MuiTableHead.css';
 
@@ -20,18 +20,22 @@ export const MuiTableHead = (props: MuiTableHeadProps) => {
         textAlign: 'center',
     }
 
-    const width = useRef<any>(32);
+    const width = useRef<any>(null);
 
-    useEffect(()=>{
-        window.addEventListener('resize',()=>{
+    const resizeEvent = useCallback(() => {
+        window.addEventListener('resize',()=> {
 
             if( width.current.clientWidth !== widthState){
                 setWidth(width.current.clientWidth);
                 console.log(width.current.clientWidth)
             }
         })
+    },[]);
 
-    },[width])
+    useEffect(()=>{
+        window.addEventListener('resize', resizeEvent)
+        return (()=>window.removeEventListener('resize',resizeEvent));
+    },[resizeEvent])
     
     return (
         <TableHead>

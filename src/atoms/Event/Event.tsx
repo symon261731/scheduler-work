@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { ETypeOfEvent } from '../../shared/Types/Types';
 import './event.css';
 import { Button } from '@mui/material';
@@ -11,7 +11,7 @@ interface EventProps{
 }
 
 
-export const Event: React.FC<EventProps> = (props: EventProps) => {
+export const Event: React.FC<EventProps> = memo((props: EventProps) => {
     const {title,start,end, widthOfTable} = props;
     
     const howManyDays = (start:number,end:number) => {
@@ -46,17 +46,16 @@ export const Event: React.FC<EventProps> = (props: EventProps) => {
     return (
             <Button 
              style={{ 
-                // flex: `0 1 ${37*howManyDays(start,end)}px`,
-                width: `${widthOfTable*howManyDays(start,end)}px`,
-                minWidth: `33px`,
+                width: `${widthOfTable*howManyDays(start,end) - 1}px`,
+                minWidth: `${widthOfTable}px`,
+                //TODO Отработать сценарии для разной длины ивента maxWidth: '360%',
                 height: '100%',
                 backgroundColor: stylesOfThisEvent?.backgroundColor, 
                 color: stylesOfThisEvent?.color,
                 padding: '0',
-                display: 'flex'
             }}
              >
                     {howManyDays(start,end)>1 ? title: 13} 
             </Button>
     )
-}
+});

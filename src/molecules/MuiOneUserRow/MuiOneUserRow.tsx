@@ -2,7 +2,7 @@ import { CSSProperties, memo} from "react";
 import { TableCell, TableRow, Checkbox } from "@mui/material";
 import {  dayEvent } from "../../shared/Types/Types";
 import { Event } from "../../atoms/Event/Event";
-import { PlanFactNormalTableCell } from "../../atoms/PlanFactNormalTableCell";
+import { PlanFactNormalTableCell } from "../../atoms/PlanFactNormalTableCell/PlanFactNormalTableCell";
 import './MuiOneUserRow.css';
 // import { howManyDays } from "../../shared/utils/howManyDays";
 
@@ -40,13 +40,11 @@ const styles: stylesForComponents= {
     },
     taskLayer: {
         position: 'absolute',
-        left: '27.5vh', 
+        left: '16.0%', 
         top: '10%',
-        maxWidth: `${100-16}%`,
         height: `${100-20}%`,
         display: 'flex',
-        width: '0%',
-        gap: '38px',
+        gap: '1.4px',
     }
    }
 
@@ -78,7 +76,7 @@ export const MuiOneUserRow = memo((props: MuiOneuserRowProps) => {
                 <TableCell
                  style={styles.date} 
                  className="date">
-                    <div className="test" style={{height:'80%'}}>
+                    {/* <div className="test" style={{height:'80%'}}>
                     {userTasks.map((oneTaskObject, index) => {
                         if(findEvent(date, oneTaskObject.day) && oneTaskObject.month === currentMonth){
                           return(<Event
@@ -88,29 +86,32 @@ export const MuiOneUserRow = memo((props: MuiOneuserRowProps) => {
                             end={oneTaskObject.end} 
                             title={oneTaskObject.event}/>)
                         }})}
-                    </div>
+                    </div> */}
                 </TableCell>
                 )
             })
             }
-            {/* { userTasks.length > 0 && 
+            { userTasks.length > 0 && 
                     <div style={styles.taskLayer}>
                         {dates.map((oneDate)=> (
                             <div style={{
                                 display: 'flex',
                                 flexDirection: 'column',
+                                // flex: `0 0 ${width}px`
+                                width: `${width}px`,
+                                flex: '1 1 auto',
+                                // gap: '2px',
                             }}>
-                                {userTasks.map((oneTaskObject) => {
+                                {userTasks.sort((a,b) => (b.end -b.start)-(a.end-a.start)).map((oneTaskObject) => {
                                     if(findEvent(oneDate, oneTaskObject.day) && oneTaskObject.month === currentMonth){
                                     return(
-                                    <Event start={oneTaskObject.start} end={oneTaskObject.end} title={oneTaskObject.event}/>
+                                    <Event widthOfTable={width} start={oneTaskObject.start} end={oneTaskObject.end} title={oneTaskObject.event}/>
                                     )
                                     }})}
-                                    
                             </div>
                         ))}
                     </div>
-            } */}
+            }
         </TableRow>
     )
 });
