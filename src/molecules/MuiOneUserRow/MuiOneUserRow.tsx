@@ -121,7 +121,7 @@ export const MuiOneUserRow = memo((props: MuiOneuserRowProps) => {
                                 flex: '1 1 auto',
                                 gap: '2px',
                                 position: 'relative',
-                                left: '0.5px',
+                                left: '0.9px',
                             }}> 
                                 {sortingUserTasks
                                     .map((oneTaskObject,indexOfTask) => {

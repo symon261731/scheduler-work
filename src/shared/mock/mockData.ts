@@ -18,10 +18,10 @@ export const mockDataUser: oneUser< dayEvent[] >[] = [
         {
             day: 9,
             start:9,
-            end:11,
+            end:15,
             month:4, 
             event: ETypeOfEvent.VACATION,
-            difference: [9,10,11],
+            difference: [9,10,11,12,13,14,15],
         },
         {
             day: 10,

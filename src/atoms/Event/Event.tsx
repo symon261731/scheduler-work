@@ -57,7 +57,7 @@ export const Event: React.FC<EventProps> = memo((props: EventProps) => {
     return (
             <Button 
              style={{ 
-                width: howManyDays(start,end) < 17 ? `${widthOfTable*howManyDays(start,end)- 2}px` : `${(widthOfTable*howManyDays(start,end)) + widthOfTable - 20}px` ,
+                width: howManyDays(start,end) < 17 ? `${widthOfTable*howManyDays(start,end)- 2}px` : `${(widthOfTable*howManyDays(start,end)) + widthOfTable - 10}px` ,
                 minWidth: `${widthOfTable - 2}px`, // по большой части для единичного ивента
                 fontWeight: stylesOfThisEvent?.fontWeight,
                 height: notOnlyEvent || title === ETypeOfEvent.EMPTY ? '50%' : '100%',
