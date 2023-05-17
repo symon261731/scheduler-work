@@ -21,3 +21,14 @@
     align-items: flex-start;  
 }
 
+.cell-button{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    cursor: not-allowed;
+}

@@ -6,7 +6,7 @@ export const PlanFactNormalTableCell = memo(() => {
 
     const commonStyles: CSSProperties = {
         padding: 0, 
-        border: '1px solid black',
+        border: '1px solid grey',
         textAlign: 'center',
     }   
 

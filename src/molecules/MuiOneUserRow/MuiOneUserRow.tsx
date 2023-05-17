@@ -1,10 +1,10 @@
-import { CSSProperties, memo} from "react";
-import { TableCell, TableRow, Checkbox } from "@mui/material";
-import {  dayEvent } from "../../shared/Types/Types";
+import { CSSProperties, memo, useMemo, useState} from "react";
+import { TableCell, TableRow, Checkbox, Button } from "@mui/material";
+import {  ETypeOfEvent, dayEvent } from "../../shared/Types/Types";
 import { Event } from "../../atoms/Event/Event";
 import { PlanFactNormalTableCell } from "../../atoms/PlanFactNormalTableCell/PlanFactNormalTableCell";
 import './MuiOneUserRow.css';
-// import { howManyDays } from "../../shared/utils/howManyDays";
+import { WorkerInfo } from "../../atoms/WorkerInfo/WorkerInfo";
 
 interface MuiOneuserRowProps {
     name: string,
@@ -17,24 +17,14 @@ interface MuiOneuserRowProps {
 }
 
 interface stylesForComponents{
-    tableCeil:CSSProperties,
-    workerInfo: CSSProperties,
     date: CSSProperties,
     taskLayer: CSSProperties,
+    cellOfLayer: CSSProperties,
 }
 
 const styles: stylesForComponents= {
-    tableCeil: {
-        padding: 0,
-        border: '1px solid black',
-    },
-    workerInfo: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-    },
     date: {
-        border:'1px solid black',
+        border:'1px solid grey',
         padding: '50px 16px',
         position: 'relative',
     },
@@ -44,38 +34,68 @@ const styles: stylesForComponents= {
         top: '10%',
         height: `${100-20}%`,
         display: 'flex',
-        gap: '1.4px',
-    }
+        gap: '1px',
+    },
+    cellOfLayer: {},
    }
 
 
 export const MuiOneUserRow = memo((props: MuiOneuserRowProps) => {
-    const {width,name,workingHours, currentMonth, specialize, dates, userTasks} = props;
+    const {width, name, workingHours, currentMonth, specialize, dates, userTasks} = props;
     const findEvent = (taskThisDay: number, date: number) => {
         if(taskThisDay === date){
             return true
         };
         return false;
     }
+    styles.cellOfLayer = {
+        display: 'flex',
+        flexDirection: 'column',
+        width: `${width}px`,
+        flex: '1 1 auto',
+    }
+
+    const sortingUserTasks = useMemo(()=>{
+        return userTasks.sort((a,b) => (b.end -b.start)-(a.end-a.start));
+    },[userTasks])
+
+    const checkNotOnlyTask = (oneTaskObject: dayEvent) => {
+        if(sortingUserTasks.length === 1){
+            return false;
+        }
+        let check = sortingUserTasks
+        .filter(el=> el!== oneTaskObject)
+        .map(element=>{ 
+            if(element.difference?.some(elem => oneTaskObject.difference?.includes(elem))){
+                console.log('because difference =>', oneTaskObject.difference,
+                            'and element difference=>', element.difference)
+                return true;
+            } else {
+                return false;
+            } 
+        })
+        
+        if(check.some(elem=> elem===true)){
+            return true;
+        }
+
+        return false;
+    }
     
     return (
         <TableRow style={{position: 'relative'}}>
-            <TableCell style={styles.tableCeil}>
-                <div style={{display: 'flex', alignItems:'center', gap:'5px'}}>
-                    <Checkbox/>
-                    <div className="worker-info" style={styles.workerInfo}>
-                        <p title={name}>{name.length >12 ? `${name.slice(0,10)}...` : name}</p>
-                        <p>{workingHours}</p>
-                        <p>{specialize}</p>
-                    </div>
-                </div>
-            </TableCell>
+            <WorkerInfo 
+            name={name} 
+            workingHours={workingHours} 
+            specialize={specialize}
+            />
             <PlanFactNormalTableCell/>
             {dates.map((date: number)=>{
                 return(
                 <TableCell
                  style={styles.date} 
                  className="date">
+                    <button className="cell-button"/>
                     {/* <div className="test" style={{height:'80%'}}>
                     {userTasks.map((oneTaskObject, index) => {
                         if(findEvent(date, oneTaskObject.day) && oneTaskObject.month === currentMonth){
@@ -97,17 +117,33 @@ export const MuiOneUserRow = memo((props: MuiOneuserRowProps) => {
                             <div style={{
                                 display: 'flex',
                                 flexDirection: 'column',
-                                // flex: `0 0 ${width}px`
                                 width: `${width}px`,
                                 flex: '1 1 auto',
-                                // gap: '2px',
-                            }}>
-                                {userTasks.sort((a,b) => (b.end -b.start)-(a.end-a.start)).map((oneTaskObject) => {
-                                    if(findEvent(oneDate, oneTaskObject.day) && oneTaskObject.month === currentMonth){
-                                    return(
-                                    <Event widthOfTable={width} start={oneTaskObject.start} end={oneTaskObject.end} title={oneTaskObject.event}/>
-                                    )
-                                    }})}
+                                gap: '2px',
+                                position: 'relative',
+                                left: '0.5px',
+                            }}> 
+                                {sortingUserTasks
+                                    .map((oneTaskObject,indexOfTask) => {
+                                        if(findEvent(oneDate, oneTaskObject.day) && oneTaskObject.month === currentMonth){
+                                            
+                                            return(
+                                                <Event
+                                                 widthOfTable={width}
+                                                 start={oneTaskObject.start} 
+                                                 end={oneTaskObject.end} 
+                                                 title={oneTaskObject.event}
+                                                 notOnlyEvent={checkNotOnlyTask(oneTaskObject)}
+                                                 />   
+
+                                            )
+                                        }
+                                        else if (oneTaskObject.difference?.find(el => el === oneDate) !== undefined && oneTaskObject.month === currentMonth){ 
+                                            return (<Event title={ETypeOfEvent.EMPTY} widthOfTable={width} start={oneDate} end={oneDate}/>)
+                                        }
+                                })
+                                }
+                              
                             </div>
                         ))}
                     </div>

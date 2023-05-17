@@ -8,11 +8,12 @@ interface EventProps{
     start: number,
     end: number,
     widthOfTable: number,
+    notOnlyEvent?: boolean,
 }
 
 
 export const Event: React.FC<EventProps> = memo((props: EventProps) => {
-    const {title,start,end, widthOfTable} = props;
+    const {title,start,end, notOnlyEvent, widthOfTable} = props;
     
     const howManyDays = (start:number,end:number) => {
         if(end-start === 0) return 1;
@@ -22,7 +23,9 @@ export const Event: React.FC<EventProps> = memo((props: EventProps) => {
     const checkStyles = (title: ETypeOfEvent) => {
         switch(title){
             case ETypeOfEvent.DISTANT : return {
-                backgroundColor: 'rgba(200, 248, 255, 1)'
+                backgroundColor: '#D5F5FF',
+                color: '#29B6E9',
+                fontWeight:'700'
             };
             case ETypeOfEvent.GROOMING : return {
                 backgroundColor: 'rgb(115, 115, 255)',
@@ -33,11 +36,19 @@ export const Event: React.FC<EventProps> = memo((props: EventProps) => {
                 color: '#EBF9F3'
             };
             case ETypeOfEvent.SICK : return {
-                backgroundColor: 'rgb(255, 101, 101)'
+                backgroundColor: '#FF9191',
+                color: 'white',
+                fontWeight: '600',
             };
             case ETypeOfEvent.VACATION : return {
-                backgroundColor: 'greenyellow'
+                backgroundColor: '#66FFCD',
+                color: '#2B6954',
+                fontWeight: '700'
             };
+            case ETypeOfEvent.EMPTY: return {
+                backgroundColor: 'transparent',
+                color: 'transparent',
+            }
             default: return undefined;
         }
     }
@@ -46,16 +57,19 @@ export const Event: React.FC<EventProps> = memo((props: EventProps) => {
     return (
             <Button 
              style={{ 
-                width: `${widthOfTable*howManyDays(start,end) - 1}px`,
-                minWidth: `${widthOfTable}px`,
-                //TODO Отработать сценарии для разной длины ивента maxWidth: '360%',
-                height: '100%',
+                width: howManyDays(start,end) < 17 ? `${widthOfTable*howManyDays(start,end)- 2}px` : `${(widthOfTable*howManyDays(start,end)) + widthOfTable - 20}px` ,
+                minWidth: `${widthOfTable - 2}px`, // по большой части для единичного ивента
+                fontWeight: stylesOfThisEvent?.fontWeight,
+                height: notOnlyEvent || title === ETypeOfEvent.EMPTY ? '50%' : '100%',
+                maxHeight: notOnlyEvent || title === ETypeOfEvent.EMPTY ? '100%' : 'none',
                 backgroundColor: stylesOfThisEvent?.backgroundColor, 
                 color: stylesOfThisEvent?.color,
                 padding: '0',
+                position:'relative',
+                zIndex:  title === ETypeOfEvent.EMPTY ? '-10' : '100',
             }}
              >
-                    {howManyDays(start,end)>1 ? title: 13} 
+                    {howManyDays(start,end)>1 ? title: '1'} 
             </Button>
     )
 });

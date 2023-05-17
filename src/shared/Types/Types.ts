@@ -6,6 +6,7 @@ export const enum ETypeOfEvent {
     SICK = 'больничный',
     VACATION = 'отпуск', 
     GROOMING = 'груминг',
+    EMPTY = '',
 }
 
 
@@ -14,5 +15,6 @@ export interface dayEvent{
     start: number,
     end: number,
     month: number,
-    event: ETypeOfEvent
+    event: ETypeOfEvent,
+    difference?: number[],
 }
